@@ -4,10 +4,11 @@ const icons = ['fa fa-diamond', 'fa fa-diamond', 'fa fa-paper-plane-o', 'fa fa-p
 const deck = document.querySelector(".deck");
 const resetBtn = document.querySelector(".restart");
 const movesContainer = document.querySelector(".moves");
-const starsContainer = document.querySelector(".stars");
-const star = `<li><i class="fa fa-star"></i></li>`;
+
 const timer = document.querySelector('.timer');
 const modalContainer = document.querySelector('.modalContainer');
+const infoMessage = document.querySelector('.infoMessage');
+const playAgainBtn = document.querySelector('.playAgainBtn');
 
 let selectedCard = [];
 let matchedCards = [];
@@ -21,7 +22,7 @@ let isFirstClick = true;
 function init() {
     //call shuffle 
     shuffle(icons);
-    //Create programatically the cards
+    //Create programmatically the cards
     for(let i = 0; i < icons.length; i++){
         const card = document.createElement("li");
         card.classList.add("card");
@@ -48,7 +49,7 @@ function click(card){
             card.classList.add("open", "show", "disabled");
             //keep in a new array the clicked card
             selectedCard.push(this);
-            //invoke the comparasion function
+            //invoke the comparision function
             isComparing(currentCard, prevCard);
             addMoves();
         } else {
@@ -86,34 +87,37 @@ function isComparing(currentCard, prevCard) {
 //check if the game is over
 function gameOver() {
     if(matchedCards.length === icons.length) {
+        stopTimer();
         showModal();
-        
     } 
 }
 
 //moves
-movesContainer.innerHTML = 0;
+movesContainer.innerHTML = `0 Moves`;
 function addMoves() {
     moves++;
-    movesContainer.innerHTML = moves;
+    movesContainer.innerHTML = `${moves} Moves`;
     rating();
 }
 
 //rating
-starsContainer.innerHTML = star + star + star;
+const starsNumber = document.querySelector(".starsNumber");
+let stars = 3;
+starsNumber.innerHTML = stars;
 function rating() {
 
     if( moves < 15) {
-        starsContainer.innerHTML = star + star + star;
+        stars = 3;
     } else if( moves < 20) {
-        starsContainer.innerHTML = star + star;
+        stars = 2;
     } else {
-        starsContainer.innerHTML = star;
+        stars = 1;
     }
+    starsNumber.innerHTML = stars;
 }
 
 
-//suffle shuffle cards randomly
+//shuffle cards randomly
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
     
@@ -134,14 +138,16 @@ function resetGame() {
      selectedCard = [];
      matchedCards = [];
      moves = 0;
-     movesContainer.innerHTML = moves;
-     starsContainer.innerHTML = star + star + star;
+     movesContainer.innerHTML = `0 Moves`;
+     starsNumber.innerHTML = 3;
      resetTimer();
      //create new cards game
+     isFirstClick = true;
      init();
 }
 
 resetBtn.addEventListener("click", function(){
+    stopTimer();
     resetGame();
 })
 
@@ -158,31 +164,33 @@ function setTimer () {
         second = 0;
       }
   }
-  function startTimer () {
+  function startTimer() {
     currentTimer = setInterval(setTimer, 1000);
   }
   
-  function stopTime () {
+  function stopTimer() {
     clearInterval(currentTimer);
   }
   
   function resetTimer() {
-    timer.innerHTML = `<i class='fa fa-clock-o'></i> ${minute}:${second}`;
-    second = 0;
-    minute = 0;
+      second = 0;
+      minute = 0;
+      timer.innerHTML = `<i class='fa fa-clock-o'></i> ${minute}:${second}`;
   }
-
+//Modal
   function showModal(){
-    modalContainer.innerHTML = `
-        <div class="modal">
-        <h4>You won!</h4>
-        <p>You finish this round after ${moves} moves</p>
-        <p>It took you ${minute}:${second} minutes</p>
-        <p>You were awarded with  stars</p>
-        <button class="playAgainBtn button">Play Again</button>
-        </div>
+    modalContainer.classList.remove("hide");
+    infoMessage.innerHTML = `
+        <p>You finish this round after ${moves} moves<br>
+        It took you ${minute}:${second} minutes<br>
+        You were awarded with  ${stars} stars </p>
     `;
-  }
+}
+
+playAgainBtn.addEventListener("click", function(){
+    resetGame();
+    hideModal();
+})
 
   function hideModal(){
     modalContainer.classList.add("hide");

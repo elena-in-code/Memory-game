@@ -101,25 +101,20 @@ h1 {
    }
 }
 
-/*
- * Styles for the Score Panel
- */
+/* Score Panel*/
+ 
 .score-panel {
     text-align: left;
-    width: 345px;
+    width: 100%;
     margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Coda', cursive;
 }
 
 .score-panel .stars {
-    margin: 0;
-    padding: 0;
-    display: inline-block;
-    margin: 0 5px 0 0;
-}
-
-.score-panel .stars li {
-    list-style: none;
-    display: inline-block;
+    display: flex;
 }
 
 .score-panel .restart {
@@ -146,9 +141,20 @@ h1 {
     border: 3px solid #02b3e4;
     width: 50%;
     height: auto;
-    top: 12em;
-    margin: auto;
-    transform: translate(50%,-50%);
+    top: 50%;
+	margin: auto;
+	transform: translate(50%,-50%);
     text-align: center;
     padding: 10px;
+    font-family: 'Coda', cursive;
+}
+
+.stars, .moves, .timer, .restart {
+    padding:10px;
+    margin: 0 10px;
+}
+
+.starIcon {
+    padding: 2%;
+    margin-right: 16%;
 }
