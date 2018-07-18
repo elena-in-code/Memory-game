@@ -35,6 +35,6 @@ project part of the [**Front-End Web Developer Nanodegree Udacity**](https://eu.
 + Once it is finished, all the cards pairs matched, you will be informed of it and the time it took you, also the number of moves as the stars you got awarded with.
 + You can reset the game anytime
 
-# [Play the game here!](https://elena-in-code.github.io/Memory-game/ "live sample the game")
+##### [Play the game here!](https://elena-in-code.github.io/Memory-game/ "live sample the game")
 
 ##### Hope you enjoy it!
