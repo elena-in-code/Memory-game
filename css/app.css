@@ -1,3 +1,4 @@
+/* Global */
 html {
     box-sizing: border-box;
 }
@@ -33,17 +34,15 @@ h1 {
     font-weight: 300;
 }
 
-/*
- * Styles for the deck of cards
- */
+/* deck of cards */
 
 .deck {
     width: 660px;
     min-height: 680px;
-    background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
+    background: linear-gradient(100deg, lightgreen 0%, lightyellow 100%);
     padding: 32px;
     border-radius: 10px;
-    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.2);
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -62,7 +61,7 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.35);
 }
 
 .deck .card.open {
@@ -72,13 +71,13 @@ h1 {
 }
 
 .deck .card.show {
-    font-size: 33px;
+    font-size: 2.5em;
 }
 
 .deck .card.match {
     cursor: default;
-    background: #02ccba;
-    font-size: 33px;
+    background: #aa7ecd ;
+    font-size: 2.5em;;
 }
 
 .deck .card.disabled {
@@ -92,13 +91,19 @@ h1 {
 /* Media screen for deck and cards */
 @media screen and (max-width: 650px){
   ul.deck{
-    max-width: 75%;
+    max-width: 85%;
     height: auto;
     margin: 0 10px 10px 0;
   }
    .card {
      margin-top: 20px;
    }
+}
+
+@media screen and (max-width:400px){
+    .deck {
+        padding: 15px;
+    }
 }
 
 /* Score Panel*/
@@ -111,6 +116,7 @@ h1 {
     align-items: center;
     justify-content: center;
     font-family: 'Coda', cursive;
+    font-size: 1.2em;
 }
 
 .score-panel .stars {
@@ -122,17 +128,22 @@ h1 {
     cursor: pointer;
 }
 
-.timer {
+.score-panel .timer {
   display: inline-block;
   margin: 0 1rem;
 }
 
-.button {
-  background-color: #02b3e4;
-  padding: 1em 2em;
-  color: #ffffff;
-  border: 0;
+.stars, .moves, .timer, .restart {
+    padding:10px;
+    margin: 0 10px;
 }
+
+.stars .starIcon {
+    padding: 2%;
+    margin-right: 16%;
+}
+
+ /*Modal*/
 
 .modal {
     z-Index: 4;
@@ -149,12 +160,9 @@ h1 {
     font-family: 'Coda', cursive;
 }
 
-.stars, .moves, .timer, .restart {
-    padding:10px;
-    margin: 0 10px;
-}
-
-.starIcon {
-    padding: 2%;
-    margin-right: 16%;
-}
+.button {
+    background-color: #02b3e4;
+    padding: 1em 2em;
+    color: #ffffff;
+    border: 0;
+  }
