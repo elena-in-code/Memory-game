@@ -4,7 +4,7 @@
 # [Memory Game](https://elena-in-code.github.io/Memory-game/ "live sample the game")
 
 
-![Memory Game Gif]( "gif of the game")
+![Memory Game Gif](https://user-images.githubusercontent.com/30567608/42864014-491ecdc8-8a65-11e8-90fb-9cecac056549.gif "gif of the game")
 
 project part of the [**Front-End Web Developer Nanodegree Udacity**](https://eu.udacity.com/course/front-end-web-developer-nanodegree--nd001).
 
