@@ -4,12 +4,12 @@ const icons = ['fa fa-diamond', 'fa fa-diamond', 'fa fa-paper-plane-o', 'fa fa-p
 const deck = document.querySelector(".deck");
 const resetBtn = document.querySelector(".restart");
 const movesContainer = document.querySelector(".moves");
-
 const timer = document.querySelector('.timer');
 const modalContainer = document.querySelector('.modalContainer');
 const infoMessage = document.querySelector('.infoMessage');
 const playAgainBtn = document.querySelector('.playAgainBtn');
-
+const starsNumber = document.querySelector(".starsNumber");
+let stars = 3;
 let selectedCard = [];
 let matchedCards = [];
 let moves = 0;
@@ -20,7 +20,7 @@ let isFirstClick = true;
 
 //Initialize game 
 function init() {
-    //call shuffle 
+    //call cards shuffle 
     shuffle(icons);
     //Create programmatically the cards
     for(let i = 0; i < icons.length; i++){
@@ -51,6 +51,7 @@ function click(card){
             selectedCard.push(this);
             //invoke the comparision function
             isComparing(currentCard, prevCard);
+            //invoke the move counting
             addMoves();
         } else {
             //No open card
@@ -69,17 +70,17 @@ function isComparing(currentCard, prevCard) {
         prevCard.classList.add("match");
         //keep in a new array the matched cards
         matchedCards.push(currentCard, prevCard);
-        
+        //clear array
         selectedCard = [];
         //check if the game it is finished
         gameOver();
-
     } else {
         //Cards don't match
         setTimeout(function () {
             currentCard.classList.remove("open", "show", "disabled");
             prevCard.classList.remove("open", "show", "disabled");
         }, 500);
+        //clear array
         selectedCard = [];
     }
 }
@@ -101,11 +102,8 @@ function addMoves() {
 }
 
 //rating
-const starsNumber = document.querySelector(".starsNumber");
-let stars = 3;
 starsNumber.innerHTML = stars;
 function rating() {
-
     if( moves < 15) {
         stars = 3;
     } else if( moves < 20) {
@@ -133,25 +131,28 @@ function shuffle(array) {
 
 //Reset game
 function resetGame() {
-     //reset all arrays of cards
+     //reset all variables
      deck.innerHTML = "";
      selectedCard = [];
      matchedCards = [];
      moves = 0;
      movesContainer.innerHTML = `0 Moves`;
      starsNumber.innerHTML = 3;
+     //reset timer
      resetTimer();
-     //create new cards game
+     //remove false from first click to start again
      isFirstClick = true;
+     //create new cards game
      init();
 }
 
+//Reset Button
 resetBtn.addEventListener("click", function(){
     stopTimer();
     resetGame();
 })
 
-//timer
+//timer section
 function setTimer () {
     timer.innerHTML = `<i class='fa fa-clock-o'></i> ${minute}:${second}`;
     second++;
@@ -177,7 +178,8 @@ function setTimer () {
       minute = 0;
       timer.innerHTML = `<i class='fa fa-clock-o'></i> ${minute}:${second}`;
   }
-//Modal
+
+//Modal section
   function showModal(){
     modalContainer.classList.remove("hide");
     infoMessage.innerHTML = `
@@ -187,12 +189,13 @@ function setTimer () {
     `;
 }
 
+//Play again Button
 playAgainBtn.addEventListener("click", function(){
     resetGame();
     hideModal();
 })
 
-  function hideModal(){
+function hideModal(){
     modalContainer.classList.add("hide");
 }
 
